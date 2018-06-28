@@ -1,39 +1,50 @@
 # coding=utf-8
 
 from flask import Flask, jsonify, request
-from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.exc import IntegrityError
+from marshmallow import Schema, fields, ValidationError, pre_load
 
-from .entities.entity import Session, engine, Base
-from .entities.dispenser import Dispenser, DispenserSchema
+from flask_cors import CORS
 
 # creating the flask application
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
 
-# if needed, generate database schema
-Base.metadata.create_all(engine)
+# configure the database
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Calvin191@localhost:5432/rxit-study'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+# define the prescriber classes
+class Prescriber(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50))
+    street = db.Column(db.String(50))
+    city = db.Column(db.String(50))
+    province = db.Column(db.String(50))
+
+class PrescriberSchema(Schema):
+    id = fields.Number()
+    name = fields.Str()
+    street = fields.Str()
+    city = fields.Str()
+    province = fields.Str()
+
+prescriberSchema = PrescriberSchema()
 
 
 # routing from the request
-@app.route('/dispensers')
-def get_dispensers():
-  # fetching from the database
-  # start session
-  session = Session()
-  
-  # reload dispenser
-  dispenser_objects = session.query(Dispenser).all()
+@app.route('/')
+def get_prescribers():
+  prescribers = Prescriber.query.all()
+  # serialize the query set
+  result = prescriberSchema.dump(prescribers)
+  return jsonify({'prescribers': result})
 
-  # transforming into JSON-serializable objects
-  schema = DispenserSchema(many=True)
-  dispensers = schema.dump(dispenser_objects)
-  
-  # serializing as JSON
-  session.close()
-  return jsonify(dispensers.data)
 
 # routing from the add
-@app.route('/dispensers', methods=['POST'])
+""" @app.route('/dispensers', methods=['POST'])
 def add_dispenser():
     # mount dispenser object
     posted_dispenser = DispenserSchema(only=('name', 'city')).load(request.get_json())
@@ -48,4 +59,9 @@ def add_dispenser():
     # return new dispenser
     new_dispenser = DispenserSchema().dump(dispenser).data
     session.close()
-    return jsonify(new_dispenser), 201    
+    return jsonify(new_dispenser), 201     """
+
+if __name__ == '__main__':
+  db.create_all()
+  print("running")
+  app.run(debug=True, port=5001)

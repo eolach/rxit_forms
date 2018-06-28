@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ScappleDocument Version="1.1" ID="10B86F48-3D6B-4129-A3DB-20D364BB3876">
+    <Notes>
+        <Note ID="0" FontSize="12.0" Position="154.277344,41.3125" Width="149.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>Postgresql set up locally and remotely</String>
+        </Note>
+        <Note ID="1" FontSize="12.0" Position="395.277344,38.535156" Width="120.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>psycopg2 is the Python driver for pg.</String>
+        </Note>
+        <Note ID="2" FontSize="12.0" Position="347.0,97.207031" Width="200.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>Flask-SQLalchemy is the version that works in Flask.</String>
+            <ConnectedNoteIDs>4-5</ConnectedNoteIDs>
+        </Note>
+        <Note ID="3" FontSize="12.0" Position="3.640625,671.78125" Width="200.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>Flask-Migrate uses Alembic to migrate databases inside Flask.</String>
+        </Note>
+        <Note ID="4" FontSize="12.0" Position="595.199219,95.246094" Width="130.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>manages configuration</String>
+            <ConnectedNoteIDs>2</ConnectedNoteIDs>
+        </Note>
+        <Note ID="5" FontSize="28.0" Position="61.96875,163.636719" Width="178.0">
+            <Appearance></Appearance>
+            <String>SQLalchemy</String>
+            <ConnectedNoteIDs>2, 6-7, 10-11, 13, 16, 18, 27</ConnectedNoteIDs>
+            <Formatting>
+                <FormatRange Bold="Yes">0,10</FormatRange>
+            </Formatting>
+        </Note>
+        <Note ID="6" FontSize="12.0" Position="341.191406,175.324219" Width="123.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>Declarative extension</String>
+            <ConnectedNoteIDs>5, 8, 20</ConnectedNoteIDs>
+        </Note>
+        <Note ID="7" FontSize="12.0" Position="317.191406,303.566406" Width="79.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>Manual ORM</String>
+            <ConnectedNoteIDs>5</ConnectedNoteIDs>
+        </Note>
+        <Note ID="8" FontSize="12.0" Position="479.949219,144.433594" Width="148.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>Base = declarative_base()</String>
+            <ConnectedNoteIDs>6, 9</ConnectedNoteIDs>
+        </Note>
+        <Note ID="9" FontSize="12.0" Position="652.0,132.585938" Width="156.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>then use Base as base for the class for the table</String>
+            <ConnectedNoteIDs>8, 12</ConnectedNoteIDs>
+        </Note>
+        <Note ID="10" FontSize="12.0" Position="384.414062,203.363281" Width="37.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>Table</String>
+            <ConnectedNoteIDs>5</ConnectedNoteIDs>
+        </Note>
+        <Note ID="11" FontSize="12.0" Position="378.914062,233.671875" Width="57.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>mapper()</String>
+            <ConnectedNoteIDs>5</ConnectedNoteIDs>
+        </Note>
+        <Note ID="12" FontSize="12.0" Position="646.585938,181.363281" Width="161.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>including column informaiton</String>
+            <ConnectedNoteIDs>9</ConnectedNoteIDs>
+        </Note>
+        <Note ID="13" FontSize="12.0" Position="194.257812,348.449219" Width="36.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>ORM</String>
+            <ConnectedNoteIDs>5, 14-15</ConnectedNoteIDs>
+        </Note>
+        <Note ID="14" FontSize="12.0" Position="307.0,357.0" Width="89.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>Python classes</String>
+            <ConnectedNoteIDs>13</ConnectedNoteIDs>
+        </Note>
+        <Note ID="15" FontSize="12.0" Position="307.292969,392.398438" Width="67.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>SQL tables</String>
+            <ConnectedNoteIDs>13</ConnectedNoteIDs>
+        </Note>
+        <Note ID="16" FontSize="12.0" Position="21.3125,341.828125" Width="102.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>SQL Expression language</String>
+            <ConnectedNoteIDs>5, 17</ConnectedNoteIDs>
+        </Note>
+        <Note ID="17" FontSize="12.0" Position="16.0,424.0" Width="111.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>primitive constructs</String>
+            <ConnectedNoteIDs>16</ConnectedNoteIDs>
+        </Note>
+        <Note ID="18" FontSize="28.0" Position="422.0,275.671875" Width="99.0">
+            <Appearance></Appearance>
+            <String>engine</String>
+            <ConnectedNoteIDs>5, 19, 21, 25, 28</ConnectedNoteIDs>
+            <Formatting>
+                <FormatRange Bold="Yes">0,6</FormatRange>
+            </Formatting>
+        </Note>
+        <Note ID="19" FontSize="12.0" Position="545.378906,311.5" Width="224.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>engine = create_engine(‘connection’, echo = ‘True’)</String>
+            <ConnectedNoteIDs>18</ConnectedNoteIDs>
+        </Note>
+        <Note ID="20" FontSize="12.0" Position="488.476562,201.761719" Width="148.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>describe tables and classes at the same time</String>
+            <ConnectedNoteIDs>6</ConnectedNoteIDs>
+        </Note>
+        <Note ID="21" FontSize="12.0" Position="504.378906,374.261719" Width="139.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>define class for the table</String>
+            <ConnectedNoteIDs>18, 22-24</ConnectedNoteIDs>
+        </Note>
+        <Note ID="22" FontSize="12.0" Position="650.0,362.0" Width="112.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>class extends Base</String>
+            <ConnectedNoteIDs>21</ConnectedNoteIDs>
+        </Note>
+        <Note ID="23" FontSize="12.0" Position="657.929688,396.671875" Width="156.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>__tablename__ is set to the name of the table in the db</String>
+            <ConnectedNoteIDs>21</ConnectedNoteIDs>
+        </Note>
+        <Note ID="24" FontSize="12.0" Position="666.0,454.0" Width="137.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>then the columns added</String>
+            <ConnectedNoteIDs>21, 26</ConnectedNoteIDs>
+        </Note>
+        <Note ID="25" FontSize="12.0" Position="521.847656,506.011719" Width="225.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>use Base.metadata.create_all(engine) to create all tables that do not already exist</String>
+            <ConnectedNoteIDs>18</ConnectedNoteIDs>
+        </Note>
+        <Note ID="26" FontSize="12.0" Position="859.984375,402.277344" Width="158.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>one has a primary key, and possibly sequential add</String>
+            <ConnectedNoteIDs>24</ConnectedNoteIDs>
+        </Note>
+        <Note ID="27" FontSize="28.0" Position="153.847656,501.742188" Width="116.0">
+            <Appearance></Appearance>
+            <String>Session</String>
+            <ConnectedNoteIDs>5, 28-30</ConnectedNoteIDs>
+            <Formatting>
+                <FormatRange Bold="Yes">0,7</FormatRange>
+            </Formatting>
+        </Note>
+        <Note ID="28" FontSize="12.0" Position="337.0,458.0" Width="174.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>Session.configure(bind.engine)</String>
+            <ConnectedNoteIDs>18, 27</ConnectedNoteIDs>
+        </Note>
+        <Note ID="29" FontSize="12.0" Position="285.0,549.0" Width="195.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>new objects bound to the database</String>
+            <ConnectedNoteIDs>27</ConnectedNoteIDs>
+        </Note>
+        <Note ID="30" FontSize="12.0" Position="289.414062,660.203125" Width="114.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>session = Session()</String>
+            <ConnectedNoteIDs>27, 31-36</ConnectedNoteIDs>
+        </Note>
+        <Note ID="31" FontSize="12.0" Position="467.0,582.207031" Width="81.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>session.add()</String>
+            <ConnectedNoteIDs>30, 37</ConnectedNoteIDs>
+        </Note>
+        <Note ID="32" FontSize="12.0" Position="457.585938,637.671875" Width="75.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>session.dirty</String>
+            <ConnectedNoteIDs>30</ConnectedNoteIDs>
+        </Note>
+        <Note ID="33" FontSize="12.0" Position="457.589844,662.707031" Width="75.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>session.new</String>
+            <ConnectedNoteIDs>30</ConnectedNoteIDs>
+        </Note>
+        <Note ID="34" FontSize="12.0" Position="472.929688,607.964844" Width="91.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>session.query()</String>
+            <ConnectedNoteIDs>30</ConnectedNoteIDs>
+        </Note>
+        <Note ID="35" FontSize="12.0" Position="431.363281,693.121094" Width="99.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>session.commit()</String>
+            <ConnectedNoteIDs>30</ConnectedNoteIDs>
+        </Note>
+        <Note ID="36" FontSize="12.0" Position="426.398438,728.222656" Width="102.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>session.rollback()</String>
+            <ConnectedNoteIDs>30</ConnectedNoteIDs>
+        </Note>
+        <Note ID="37" FontSize="12.0" Position="605.6875,572.363281" Width="187.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>define instance of class, then add</String>
+            <ConnectedNoteIDs>31</ConnectedNoteIDs>
+        </Note>
+    </Notes>
+    <BackgroundShapes></BackgroundShapes>
+    <Stacks>
+        <Stack>32-33</Stack>
+    </Stacks>
+    <AutoFit>4-8, 10-15, 17-18, 21-22, 24, 27-37</AutoFit>
+    <NoteStyles>
+        <Style Name="Bubble (Blue)" ID="6B483B08-D447-4287-AEF9-A4BDE3CA3774" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.561855 0.71062 0.779401</BorderColor>
+            <FillColor>0.702319 0.888276 0.974252</FillColor>
+        </Style>
+        <Style Name="Bubble (Green)" ID="4058140B-A3F4-4678-84B3-9E9947C9E1C7" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.572684 0.758969 0.558154</BorderColor>
+            <FillColor>0.715855 0.948712 0.697692</FillColor>
+        </Style>
+        <Style Name="Bubble (Pink)" ID="AD48A7E5-F553-439A-98FD-75898BBABF87" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.794796 0.560965 0.58607</BorderColor>
+            <FillColor>0.957566 0.766747 0.999616</FillColor>
+        </Style>
+        <Style Name="Bubble (Red)" ID="11FEA4D6-27C4-4EA5-A9AF-BC075F45C072" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.794796 0.560965 0.58607</BorderColor>
+            <FillColor>0.993495 0.701207 0.732587</FillColor>
+        </Style>
+        <Style Name="Bubble (Yellow)" ID="AB696554-B678-4417-89CB-89A470EBE977" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.798177 0.714184 0.522055</BorderColor>
+            <FillColor>0.997722 0.89273 0.652569</FillColor>
+        </Style>
+        <Style Name="Red Text" ID="3EB1912D-A7D9-4AE1-AF09-21C31F853250" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="Yes" AffectNoteBody="No" AffectFade="No">
+            <TextColor>1.0 0.0 0.0</TextColor>
+        </Style>
+        <Style Name="Title Text" ID="77C2BFCA-8817-4888-8A2C-D0F1C7E1D83D" AffectFontStyle="Yes" AffectAlignment="Yes" AffectTextColor="No" AffectNoteBody="No" AffectFade="No">
+            <FontSize>28.0</FontSize>
+            <IsBold>Yes</IsBold>
+        </Style>
+    </NoteStyles>
+    <UISettings>
+        <BackgroundColor>0.999767 0.98837 0.949907</BackgroundColor>
+        <DefaultFont>Helvetica</DefaultFont>
+        <DefaultTextColor>0.0 0.0 0.0</DefaultTextColor>
+    </UISettings>
+    <PrintSettings PaperSize="612.0,792.0" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="na-letter" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
+</ScappleDocument>
