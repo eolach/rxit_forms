@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow, pprint
-from marshmallow import ValidationError, post_load
+from marshmallow import ValidationError, Schema, fields, post_load
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Calvin191@localhost:5432/test_db'
@@ -21,12 +21,11 @@ class Book(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('author.id'))
     author = db.relationship('Author', backref='books')
 
-class AuthorSchema(ma.ModelSchema):
-    class Meta:
-        model = Author
-        @post_load
-        def make_user(self, data):
-            return User(**data)
+class AuthorSchema(Schema):
+#    class Meta:
+ #       model = Author
+     id = fields.Number()
+     name = fields.Str()
 
 class BookSchema(ma.ModelSchema):
     class Meta:
@@ -56,19 +55,18 @@ def add_author():
     
   # Validate and deserialize input
   try:
-    data = author_schema.load({'id': 5, 'name':'Jim Brown'})
+    posted_author = AuthorSchema(only=('name')).load(json_data)
   except ValidationError as err:
     return jsonify(err.messages), 402
 
-  this_authors_name = data['name']
-  #ew_author = Author(name=data['name'])
-
-  #db.add(new_author)
-  #db.commit()
-  #result = author_schema.dump(Author.query.get.new_author.id)
+  author = Author(**posted_author.data)
+  
+  db.add(author)
+  db.commit()
+  result = author_schema.dump(Author.query.get.author.id)
   return jsonify({
       'message': 'created new author',
-      'data': this_authors_name
+      'data': result
   })
   
 

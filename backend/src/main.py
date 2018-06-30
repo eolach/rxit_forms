@@ -1,8 +1,10 @@
 # coding=utf-8
 
 from flask import Flask, jsonify, request
-from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow
+from sqlalchemy import create_engine, Column, String, Integer, Text
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from marshmallow import Schema, fields
 
 from flask_cors import CORS
 
@@ -11,65 +13,89 @@ app = Flask(__name__)
 CORS(app)
 
 # configure the database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Calvin191@localhost:5432/rxit-study'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-ma = Marshmallow(app)
+engine = create_engine('postgresql://postgres:Calvin191@localhost:5432/rxit-study')
+Session = sessionmaker(bind=engine)
+Base = declarative_base()
 
 ###### MODELS ######
-class Prescriber(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
-    street = db.Column(db.String(50))
-    city = db.Column(db.String(50))
-    province = db.Column(db.String(50))
+class Prescriber(Base):
+    __tablename__ = 'prescribers'
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    street = Column(String)
+    city = Column(String)
+    province = Column(String)
+
+    def __init__(self, name, street, city, province):
+        self.name = name
+        self.street = street
+        self.city = city
+        self.province = province
 
 ####### SCHEMAS #########
-class PrescriberSchema(ma.ModelSchema):
-    class Meta:
-        model = Prescriber
+class PrescriberSchema(Schema):
+    id = fields.Number()
+    name = fields.Str()
+    street = fields.Str()
+    city = fields.Str()
+    province = fields.Str()
 
-
-prescriberSchema = PrescriberSchema()
-prescribersSchema = PrescriberSchema(many=True)
+# if needed, generate database schema
+Base.metadata.create_all(engine)
 
 
 # routing from the request
 @app.route('/prescribers')
 def get_prescribers():
-  prescribers = Prescriber.query.all()
-  # serialize the query set
-  result = prescribersSchema.dump(prescribers)
-  return jsonify({'prescribers': result})
+  # fetching from the database
+  session = Session()
+  prescriber_objects = session.query(Prescriber).all()
+  
+  # transforming into JSON-serializable objects
+  schema = PrescriberSchema(many=True)
+  prescribers = schema.dump(prescriber_objects)
+  
+  # serializing as JSON
+  session.close()
+  return jsonify(prescribers.data)
 
 
 # routing from the add
 @app.route('/prescribers/', methods=['POST'])
 def new_prescriber():
+    
+    #check request
     json_data = request.get_json()
     if not json_data:
         return jsonify({'message': 'No input data provided'}), 400
+    
     # Validate and deserialize input
     try:
-        data = prescriberSchema.load(json_data)
+        posted_prescriber = PrescriberSchema(only=('name', 'street', 'city', 'province')) \
+            .load(json_data)
     except ValidationError as err:
         return jsonify(err.messages), 402
 
-    thisPrescriberName = data['name'][0]
-    thisPrescriber = Prescriber.query.filter_by(name=thisPrescriberName).first()
+    """ thisPrescriberName = data['name'][0]
+    thisPrescriber = Prescriber
+        .query.filter_by(name=thisPrescriberName).first()
     
-    if thisPrescriber is None:
-      prescriber = Prescriber(name=data['name'], city=data['city'], province=data['province'])
+    if thisPrescriber is None: """
+    prescriber = Prescriber(**posted_prescriber.data)
 
-    db.session.add(prescriber)
-    db.session.commit()
-    result = prescriberSchema.dump(Prescriber.query.get(prescriber.id))
+    # persist in database
+    session = Session()
+    session.add(prescriber)
+    session.commit()
+
+    # return created prescriber
+    new_prescriber = PrescriberSchema().dump(prescriber).data
     return jsonify({
         'message': 'Created new prescriber. ',
-        'prescriber': result,
+        'prescriber': new_prescriber,
         }) 
 
 if __name__ == '__main__':
-  db.create_all()
+#  db.create_all()
   print("running")
   app.run(debug=True, port=5000)
