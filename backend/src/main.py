@@ -5,8 +5,10 @@ from sqlalchemy import create_engine, Column, String, Integer, Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from marshmallow import Schema, fields
-
 from flask_cors import CORS
+
+from entities.prescriber import Prescriber
+from entities.dispenser import Dispenser
 
 # creating the flask application
 app = Flask(__name__)
@@ -16,29 +18,6 @@ CORS(app)
 engine = create_engine('postgresql://postgres:Calvin191@localhost:5432/rxit-study')
 Session = sessionmaker(bind=engine)
 Base = declarative_base()
-
-###### MODELS ######
-class Prescriber(Base):
-    __tablename__ = 'prescribers'
-    id = Column(Integer, primary_key=True)
-    name = Column(String)
-    street = Column(String)
-    city = Column(String)
-    province = Column(String)
-
-    def __init__(self, name, street, city, province):
-        self.name = name
-        self.street = street
-        self.city = city
-        self.province = province
-
-####### SCHEMAS #########
-class PrescriberSchema(Schema):
-    id = fields.Number()
-    name = fields.Str()
-    street = fields.Str()
-    city = fields.Str()
-    province = fields.Str()
 
 # if needed, generate database schema
 Base.metadata.create_all(engine)
@@ -94,8 +73,3 @@ def new_prescriber():
         'message': 'Created new prescriber. ',
         'prescriber': new_prescriber,
         }) 
-
-if __name__ == '__main__':
-#  db.create_all()
-  print("running")
-  app.run(debug=True, port=5000)
