@@ -7,11 +7,13 @@ from sqlalchemy.orm import sessionmaker
 from marshmallow import Schema, fields
 from flask_cors import CORS
 
-from entities.prescriber import Prescriber
-from entities.dispenser import Dispenser
+from src import app, routes
+
+# from entities.prescriber import Prescriber
+# from entities.dispenser import Dispenser
 
 # creating the flask application
-app = Flask(__name__)
+# app = Flask(__name__)
 CORS(app)
 
 # configure the database
@@ -23,7 +25,7 @@ Base = declarative_base()
 Base.metadata.create_all(engine)
 
 
-# routing from the request
+""" # routing from the request
 @app.route('/prescribers')
 def get_prescribers():
   # fetching from the database
@@ -37,7 +39,7 @@ def get_prescribers():
   # serializing as JSON
   session.close()
   return jsonify(prescribers.data)
-
+ """
 
 # routing from the add
 @app.route('/prescribers/', methods=['POST'])
