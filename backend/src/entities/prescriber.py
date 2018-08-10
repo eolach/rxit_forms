@@ -1,36 +1,28 @@
 # coding=utf-8
 
-# import basic modules
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.exc import IntegrityError
-from marshmallow import Schema, fields, ValidationError, pre_load
+# from flask_marshmallow import Marshmallow
 
-from src.main import Base
+from src import db
+from src import ma
 
-# import local modules
-# from src.main import db
-
+# from marshmallow_sqlalchemy import field_for
 # define the prescriber classes
-###### MODEL ######
-class Prescriber(Base):
-    __tablename__ = 'prescribers'
-    id = Column(Integer, primary_key=True)
-    name = Column(String)
-    street = Column(String)
-    city = Column(String)
-    province = Column(String)
+# ##### MODEL ######
 
-    def __init__(self, name, street, city, province):
-        self.name = name
-        self.street = street
-        self.city = city
-        self.province = province
 
-####### SCHEMA #########
-class PrescriberSchema(Schema):
-    id = fields.Number()
-    name = fields.Str()
-    street = fields.Str()
-    city = fields.Str()
-    province = fields.Str()
-    
+class Prescriber(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    street = db.Column(db.String)
+    city = db.Column(db.String)
+    province = db.Column(db.String)
+
+    def __repr__(self):
+        return '<Prescriber {}>'.format(self.name)
+
+
+class PrescriberSchema(ma.ModelSchema):
+    # id = field_for(Prescriber, 'id', dump_only=True)
+
+    class Meta:
+        model = Prescriber
