@@ -116,7 +116,6 @@ def update_prescriber():
     else: 
         error_message = "Failed"
 
-    return created prescriber
     new_prescriber = PrescriberSchema().dump(existing_prescriber).data
     return jsonify({
         'message': error_message,
