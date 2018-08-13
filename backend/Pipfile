@@ -12,6 +12,8 @@ flask-migrate = "*"
 flask-marshmallow = "*"
 marshmallow-sqlalchemy = "*"
 python-jose-cryptodome = "*"
+flask-wtf = "*"
+flask-login = "*"
 
 [dev-packages]
 
