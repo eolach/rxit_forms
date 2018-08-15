@@ -7,7 +7,7 @@ from .auth import AuthError, requires_auth
 from src import app, db
 from src.entities.dispenser import Dispenser, DispenserSchema
 from src.entities.prescriber import Prescriber, PrescriberSchema
-from src.entities.user import User
+from src.entities.user import PrivateUser
 # from entities.dispenser import Dispenser
 
 dispenser_schema = DispenserSchema()
@@ -133,7 +133,7 @@ def login():
         return redirect(url_for(''))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
+        user = PrivateUser.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password(form.password.data)):
             flash('Invalid user name or password')
             return redirect(url_for('login'))
