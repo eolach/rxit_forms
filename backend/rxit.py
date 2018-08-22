@@ -21,6 +21,6 @@ def make_shell_context():
             'Dispenser': Dispenser,
             'DispenserSchema': DispenserSchema,
             'User': User,
-            'UserSchema': PrivateUserSchema,
+            'UserSchema': UserSchema,
             'request': request
             }

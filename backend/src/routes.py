@@ -1,19 +1,21 @@
-from flask import jsonify, request
-from marshmallow import ValidationError
+from flask import jsonify, request, url_for, redirect
 from flask_login import current_user, login_user
+from werkzeug.urls import url_parse
 
-from .auth import AuthError, requires_auth
-
+import logging
 from src import app, db
+from src.forms import LoginForm, ValidationError
 from src.entities.dispenser import Dispenser, DispenserSchema
 from src.entities.prescriber import Prescriber, PrescriberSchema
-from src.entities.user import User
+from src.entities.user import User, UserSchema
 # from entities.dispenser import Dispenser
 
 dispenser_schema = DispenserSchema()
 dispensers_schema = DispenserSchema(many=True)
 prescriber_schema = PrescriberSchema()
 prescribers_schema = PrescriberSchema(many=True)
+user_schema = UserSchema()
+users_schema = UserSchema(many=True)
 
 
 # routing from the request
@@ -115,7 +117,7 @@ def update_prescriber():
     # persist in database
     # db.session.add(prescriber)
         db.session.commit()
-    else: 
+    else:
         error_message = "Failed"
 
     new_prescriber = PrescriberSchema().dump(existing_prescriber).data
@@ -126,29 +128,33 @@ def update_prescriber():
         # 'prescriber': existing_prescriber.name,
         })
 
+
 # routing for user
-@app.route('/user/authenticate')
+@app.route('/users')
+def get_users():
+    all_users = User.query.all()
+    users_result = users_schema.dump(all_users)
+    return jsonify(users_result.data)
+
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    if current_user.is_authenticated:
-        return redirect(url_for(''))
+    #     return redirect(url_for('index'))
     form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        if user is None or not user.check_password(form.password(form.password.data)):
-            flash('Invalid user name or password')
-            return redirect(url_for('login'))
-        login_user(user, remember=form.remember_me.data)
-        return redirect(url_for(''))
-
-
-# handle authorization error
-@app.errorhandler(AuthError)
-def handle_auth_error(ex):
-    response = jsonify(ex.error)
-    response.status_code = ex.status_code
-    return response
-
-# @app.route('/shutdown', methods=['POST'])
-# def shutdown():
-#     shutdown_server()
-#     return 'Server shutting down...'
+    # if form.validate_on_submit():
+    user = User.query.filter_by(username=form.username.data).first()
+    app.logger.warning("logging here")
+    #     if user is None or not user.check_password(form.password(form.password.data)):
+    #         flash('Invalid user name or password')
+    #         return redirect(url_for('login'))
+    login_user(user, remember=form.remember_me.data)
+    #     return redirect(url_for(''))
+    if (current_user.participant_type == "Prescriber"):
+        current_participant = Prescriber.query.filter_by(name=current_user.participant_name).first()
+        return jsonify(PrescriberSchema().dump(current_participant).data)
+    elif (current_user.participant_type == "Dispenser"):
+        current_participant = Dispenser.query.filter_by(name=current_user.participant_name).first()
+        return jsonify(DispenserSchema().dump(current_participant).data)
+    else:
+        return jsonify({"message": "No current participant"})   
+    

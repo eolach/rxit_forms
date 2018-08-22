@@ -11,7 +11,11 @@ class User (UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
+    password = db.Column(db.String(128))
     authorization_level = db.Column(db.Integer)
+    remember_me = db.Column(db.Boolean)
+    participant_name = db.Column(db.String(128))
+    participant_type = db.Column(db.String(128))
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
