@@ -1,28 +1,39 @@
-FROM python:3.6.5
+FROM python:3.6
 
 LABEL Server for rxit forms 
 
-# Create the group and user for this container
-# In useradd, the -m option creates a home directory,
-# -g identifies the usergroup, and -s adds the 
-#  shell command the user will use for accessing the 
-# RUN groupadd flaskgroup && useradd -m -g flaskgroup -s /bin/bash flask
+# Adapted from Kennedy adding creating usergroup and user
+# -m specfies the user's home directory, -g the groups and -s  the login shell
+RUN addgroup flaskgroup && useradd -m -g flaskgroup -s /bin/bash flask
 
 # Create the working directory (and set it as the working directory)
-RUN mkdir -p /home/flask/app/backend
-WORKDIR /home/flask/app/backend
+# Creates parent directory if needed (-p)
+RUN mkdir -p /home/backend
+WORKDIR /home/backend
 
-# Install the package dependencies
-# This version uses pipenv
-RUN pip install pipenv
-RUN pipenv install
+COPY requirements.txt /home/backend
+# This is the version Kennedy uses
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the source into the container
-COPY . /home/flask/app/backend
+# Note a virtual environment may not be necessary for Docker
+# RUN python -m venv venv
+# RUN venv/bin/pip install -r requirements.txt
+# RUN venv/bin/pip install gunicorn
 
-# RUN chown -R flask:flaskgroup /home/flask
-# USER flask
+# Copy the code for the backend
+COPY src /home/backend/src
+COPY config.py /home/backend/config.py
 
-EXPOSE 5000
+# Add in the extras that allow the system to be refined within the docker container
+# COPY migrations migrations
+# COPY run.py config.py boot.sh ./
+# RUN chmod +x boot.sh
 
-CMD ["python", "run.py"]
+# ENV FLASK_APP run.py
+
+RUN chown -R flask:flaskgroup /home/backend
+
+USER flask
+
+# EXPOSE 5000
+# ENTRYPOINT ["./boot.sh"]

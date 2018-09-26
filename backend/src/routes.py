@@ -147,7 +147,7 @@ def login():
     user = User.query.filter_by(username=form.username.data).first()
     app.logger.warning("logging here: " + user.username)
     if user is None or not user.check_password(form.password.data):
-        app.logger.warning("Oops here: " + user.username)    
+        app.logger.warning("Oops here: " + user.username)
         #     # return redirect(url_for('login'))
         return jsonify({
             "message": "incorrect password",
