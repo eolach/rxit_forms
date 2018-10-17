@@ -1,0 +1,29 @@
+version: '3'
+services:
+  backend:
+    restart: always
+    build: ./backend
+    expose:
+      - "8000"
+    command: /usr/local/bin/gunicorn -w 2 -b :8000 src:app
+    depends_on: 
+      - postgres
+
+  nginx:
+    restart: always
+    build: ./rxit-forms
+    ports: 
+      - "80:80"
+    depends_on:
+      - backend
+
+  postgres:
+    restart: always
+    image: postgres:10.5
+    build: ./postgresql
+    # volumes:
+    #   - /var/lib/postgresql
+    command: "true"
+    expose:
+      - "5432"
+     
