@@ -21,8 +21,8 @@ services:
     restart: always
     image: postgres:10.5
     build: ./postgresql
-    volumes:
-      - /var/lib/postgresql"
+    # volumes:
+    #   - /var/lib/postgresql
     command: "true"
     expose:
       - "5432"

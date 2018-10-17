@@ -22,7 +22,7 @@ users_schema = UserSchema(many=True)
 # routing from the request
 @app.route('/')
 def index():
-    return "Index still here"
+    return "Index still, still here"
 
 
 # handle dispensers routing
