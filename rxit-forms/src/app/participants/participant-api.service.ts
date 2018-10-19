@@ -22,7 +22,7 @@ export class ParticipantApiService {
 
     // get list of prescribers
     getPrescribers(): Observable<Prescriber[]> {
-        return this.http.get<Prescriber[]>(`${environment.API_URL}/prescribers`)
+        return this.http.get<Prescriber[]>(`${environment.API_URL}/api/prescribers`)
             .pipe(
                 tap(prescribers => this.log(`fetched prescribers`)),
                 catchError(this.handleError('getPrescribers', []))
@@ -32,7 +32,7 @@ export class ParticipantApiService {
     // get an individual prescriber
     getPrescriber(id: number): Observable<Prescriber> {
         return this.http
-            .get<Prescriber>(`${environment.API_URL}/prescribers/${id}`)
+            .get<Prescriber>(`${environment.API_URL}/api/prescribers/${id}`)
             .pipe(
                 tap(_ => console.log(`fetched prescriber id=${id}`)),
                 catchError(this.handleError<Prescriber>(`getPrescriber id=${id}`))
@@ -41,7 +41,7 @@ export class ParticipantApiService {
 
     updatePrescriber(prescriber: Prescriber): Observable<Prescriber> {
         return this.http
-        .post<Prescriber>(`${environment.API_URL}`, prescriber, httpOptions)
+        .post<Prescriber>(`${environment.API_URL}/api`, prescriber, httpOptions)
             .pipe(
                 tap(_ => this.log(`updated prescriber w/ id=${prescriber.id}`)),
                 catchError(this.handleError<Prescriber>('addHero'))
@@ -50,7 +50,7 @@ export class ParticipantApiService {
 
     // get list of dispensers
     getDispensers(): Observable<Dispenser[]> {
-        return this.http.get<Dispenser[]>(`${environment.API_URL}/dispensers`)
+        return this.http.get<Dispenser[]>(`${environment.API_URL}/api/dispensers`)
             .pipe(
                 tap(dispensers => this.log(`fetched dispensers`)),
                 catchError(this.handleError('getDispensers', []))
@@ -60,7 +60,7 @@ export class ParticipantApiService {
     // get an individual dispenser
     getDispenser(id: number): Observable<Dispenser> {
         return this.http
-            .get<Dispenser>(`${environment.API_URL}/dispensers/${id}`)
+            .get<Dispenser>(`${environment.API_URL}/api/dispensers/${id}`)
             .pipe(
                 tap(_ => this.log(`fetched dispenser id=${id}`)),
                 catchError(this.handleError<Dispenser>(`getDispenser id=${id}`))
@@ -69,7 +69,7 @@ export class ParticipantApiService {
 
     login(username: string, password: string): Observable<User> {
         return this.http
-            .post<User>(`${environment.API_URL}/login`, { username: username, password: password })
+            .post<User>(`${environment.API_URL}/api/login`, { username: username, password: password })
             .pipe(
                 tap(_ => console.log(`logged in user`)),
                 catchError(this.handleError<User>('logging in'))

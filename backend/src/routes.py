@@ -22,11 +22,11 @@ users_schema = UserSchema(many=True)
 # routing from the request
 @app.route('/')
 def index():
-    return "Index still, still here"
+    return "Should not see this"
 
 
 # handle dispensers routing
-@app.route('/dispensers')
+@app.route('/api/dispensers')
 def get_dispensers():
     all_dispensers = Dispenser.query.all()
     dispensers_result = dispensers_schema.dump(all_dispensers)
@@ -46,7 +46,7 @@ def get_dispenser(dispenser_id):
 
 
 # routing from the add Dispenser
-@app.route('/dispensers', methods=['POST'])
+@app.route('/api/dispensers', methods=['POST'])
 def new_dispenser():
     # check request
     json_data = request.get_json()
@@ -75,7 +75,7 @@ def new_dispenser():
 
 
 # handle prescribers routing
-@app.route('/prescribers')
+@app.route('/api/prescribers')
 def get_prescribers():
     all_prescribers = Prescriber.query.all()
     prescribers_result = prescribers_schema.dump(all_prescribers)
@@ -83,7 +83,7 @@ def get_prescribers():
 
 
 # handle single prescriber routing
-@app.route('/prescribers/<string:prescriber_id>')
+@app.route('/api/prescribers/<string:prescriber_id>')
 def get_prescriber(prescriber_id):
     id = int(prescriber_id)
     try:
@@ -95,7 +95,7 @@ def get_prescriber(prescriber_id):
 
 
 # routing from the add Prescriber
-@app.route('/prescribers', methods=['POST'])
+@app.route('/api/prescribers', methods=['POST'])
 def update_prescriber():
     # check request
     json_data = request.get_json()
@@ -132,14 +132,14 @@ def update_prescriber():
 
 
 # routing for user
-@app.route('/users')
+@app.route('/api/users')
 def get_users():
     all_users = User.query.all()
     users_result = users_schema.dump(all_users)
     return jsonify(users_result.data)
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/api/login', methods=['GET', 'POST'])
 def login():
     #     return redirect(url_for('index'))
     form = LoginForm()
