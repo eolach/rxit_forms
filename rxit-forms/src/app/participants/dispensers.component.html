@@ -1,0 +1,46 @@
+<div fxFlex="450px">
+  <!-- <br>
+    <div class="container">
+      <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row" fxLayoutAlgin="space-around center" class="coneent">
+        <div class="blocks" >
+          <button button="submit" mat-raised-button color="primary">
+            <mat-icon>add</mat-icon> Add Dispenser
+          </button>
+        </div>
+      </div>
+    </div>
+    <br> -->
+  <div class="container" fxLayout="column" fxLayoutAlign="top right" >
+    <div>
+      <mat-card class="card">
+        <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+          <h3>Participating Dispensers</h3>
+        </mat-card-title>
+        <mat-card-content>
+          <div class="example-container mat-elevation-z8">
+            <mat-table #table [dataSource]="dataSource">
+              <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{ element.name }} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="street">
+                <mat-header-cell *matHeaderCellDef>Street</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{ element.street }} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="city">
+                <mat-header-cell *matHeaderCellDef>City</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{ element.city }} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="province">
+                <mat-header-cell *matHeaderCellDef>Province</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{ element.province }} </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

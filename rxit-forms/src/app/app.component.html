@@ -1,0 +1,72 @@
+<mat-sidenav-container>
+	<mat-sidenav #sidenav role="navigation">
+		<mat-nav-list>
+			<a *ngIf="!authorized" mat-list-item routerLink="/login">
+				<mat-icon class="icon">input</mat-icon>
+				<span class="label">Login</span>
+			</a>
+			<a *ngIf="authorized" mat-list-item type="button">
+				<mat-icon class="icon">input</mat-icon>
+				<span class="label">LogOut</span>
+			</a>
+			<a mat-list-item routerLink="/">
+				<mat-icon class="icon">home</mat-icon>
+				<span class="label"> Home</span>
+			</a>
+			<a *ngIf="authorized" mat-list-item routerLink="/dashboard">
+				<mat-icon class="icon">dashboard</mat-icon>
+				<span class="label">Dashboard</span>
+			</a>
+		</mat-nav-list>
+	</mat-sidenav>
+	<mat-sidenav-content>
+		<mat-toolbar color="primary">
+			<div fxHide.gt-xs>
+				<button mat-icon-button (click)="sidenav.toggle()">
+					<mat-icon>menu</mat-icon>
+				</button>
+			</div>
+			<div>
+				<a>PrescribeIT study</a>
+			</div>
+			<div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
+				<ul fxLayout fxLayoutGap="20px" class="navigation-items">
+					<li>
+						<a *ngIf="!authorized" >
+							<mat-icon class="icon">input</mat-icon>
+							<span class="label">Login</span>
+						</a>
+					</li>
+					<li>
+						<a routerLink="/">
+							<mat-icon class="icon">home</mat-icon>
+							<span class="label">Home</span>
+						</a>
+					</li>
+					<li>
+						<a *ngIf="authorized" routerLink="/prescribers">
+							<mat-icon class="icon">dashboard</mat-icon>
+							<span class="label">Prescribers</span>
+						</a>
+					</li>
+					<li>
+						<a *ngIf="authorized" routerLink="/dispensers">
+							<mat-icon class="icon">dashboard</mat-icon>
+							<span class="label">Dispensers</span>
+						</a>
+					</li>
+					<li>
+						<a *ngIf="authorized" >
+							<mat-icon class="icon">input</mat-icon>
+							<span class="label">LogOut</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</mat-toolbar>
+	</mat-sidenav-content>
+</mat-sidenav-container>
+<main>
+	<alert>Alert</alert>
+	<app-welcome></app-welcome>
+</main>
