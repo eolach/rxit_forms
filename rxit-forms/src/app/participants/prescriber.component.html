@@ -3,8 +3,26 @@
     <div>
     <div fxLayout="column" fxLayoutAlign="center center">
       <div class="main-content">
-        <mat-accordion>
-          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" showToggle>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Panel titile
+            </mat-panel-title> 
+            <mat-panel-description>
+              Panel description
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <mat-form-field>
+            <input matInput placeholder="first name">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Age">
+          </mat-form-field>
+        </mat-expansion-panel>
+        
+        <!-- <mat-accordion>
+          <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title class="card-title">
                 <h3>{{prescriber.name}}</h3>
@@ -13,9 +31,9 @@
                 Details of this prescriber practice
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <!-- <mat-form-field> -->
-            <div class="form-group" fxLayout="row">
-              <label for='street'>Address:</label>
+            <mat-form-field> -->
+            <!-- <div class="form-group" fxLayout="row"> -->
+              <!-- <label for='street'>Address:</label>
               <input type='text' class="input-text" [(ngModel)]='prescriber.street' name="street" />
             </div>
             <div class="form-group" fxLayout="row">
@@ -26,11 +44,11 @@
               <label for='province'>Province:</label>
               <input type='text' class="input-text" [(ngModel)]="prescriber.province" name='province' />
             </div>
-            <!-- </mat-form-field> -->
-          </mat-expansion-panel>
-        </mat-accordion>
+            </mat-form-field>
+          </mat-expansion-panel> -->
+        <!-- </mat-accordion> 
          <mat-accordion>
-          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" showToggle>
+          <mat-expansion-panel>
             <mat-expansion-panel-header color='accent'>
               <mat-panel-title class="card-title">
                 Prescriber statistics
@@ -138,7 +156,7 @@
             </mat-card-content>
           </mat-expansion-panel>
         </mat-accordion>
-        <!-- <mat-accordion>
+        <mat-accordion>
           <mat-expansion-panel>
             [expanded]="step === 0" (opened)="setStep(0)" showToggle>
             <mat-expansion-panel-header>
@@ -405,11 +423,11 @@
               </div>
             </mat-card-content>
           </mat-expansion-panel>
-        </mat-accordion> -->
+        </mat-accordion>
         <button width="80px" (click)="goBack()" mat-raised-button color="primary">go back</button>
         <button (click)="updatePrescriber()" mat-raised-button color="primary">save</button>
       </div>
     </div>
   </div>
 </form>
-<p>prescriberform value: {{ prescriber.name | json}}</p>
+<p>prescriberform value: {{ prescriber.name | json}}</p> -->

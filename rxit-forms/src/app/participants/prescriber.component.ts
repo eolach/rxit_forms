@@ -6,6 +6,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { Prescriber } from './participant.model';
 import { ParticipantApiService } from './participant-api.service';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 export interface Role {
   value: string;
@@ -19,6 +21,7 @@ export interface Role {
 })
 export class PrescriberComponent implements OnChanges {
   @Input() prescriber: Prescriber;
+  panelOpenState = false;
 
   prescriberForm: FormGroup;
 
@@ -28,7 +31,8 @@ export class PrescriberComponent implements OnChanges {
     { value: 'assistant', viewValue: 'Assistant' },
     { value: 'other', viewValue: 'Other' }
   ];
-  step = 0;
+ 
+ /*  step = 0;
 
   setStep(index: number) {
     this.step = index;
@@ -40,7 +44,7 @@ export class PrescriberComponent implements OnChanges {
 
   prevStep() {
     this.step--;
-  }
+  } */
 
   constructor(
     private route: ActivatedRoute,

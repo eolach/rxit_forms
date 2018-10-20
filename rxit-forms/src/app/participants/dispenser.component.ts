@@ -6,6 +6,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { Dispenser } from './participant.model';
 import { ParticipantApiService } from './participant-api.service';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
   selector: 'app-dispenser-component',
@@ -17,6 +19,7 @@ export class DispenserComponent implements OnChanges {
   @Input()
   dispenser: Dispenser;
   dispenserSubs: Subscription;
+  panelOpenState = false;
 
   step = 0;
 

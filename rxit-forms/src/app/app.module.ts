@@ -66,6 +66,7 @@ import { PhysicianComponent } from './participants/physician.component';
     MatInputModule,
     MatFormFieldModule,
     MatCheckboxModule,
+    MatExpansionModule,
   ],
   imports: [
     BrowserModule,

@@ -5,14 +5,14 @@
 		of PrescribeIT.
 		<br> Select a participant to begin data entry.
 	</p>
-	<div *ngIf="login" fxLayout="row" fxLayoutGap="20px" fxLayout.lt-md="column" fxLayoutAlign="center start">
+<!-- 	<div *ngIf="login" fxLayout="row" fxLayoutGap="20px" fxLayout.lt-md="column" fxLayoutAlign="center start">
 		<app-login></app-login>
 	</div>
-	<div *ngIf="selectedPrescriber" fxLayout="row" fxLayoutGap="20px" fxLayout.lt-md="column" fxLayoutAlign="center start">
+ -->	
+ <!-- <div *ngIf="selectedPrescriber" fxLayout="row" fxLayoutGap="20px" fxLayout.lt-md="column" fxLayoutAlign="center start"> -->
 		<app-prescriber-component [prescriber]="selectedPrescriber">Prescriber here</app-prescriber-component>
-	</div>
-	<div *ngIf="selectedDispenser" fxLayout="row" fxLayoutGap="20px" fxLayout.lt-md="column" fxLayoutAlign="center start">
-		<app-dispenser-component [dispenser]="selectedDispenser">Prescriber here
-			</app-dispenser-component>
-	</div>
+	<!-- </div> -->
+	<!-- <div *ngIf="selectedDispenser" fxLayout="row" fxLayoutGap="20px" fxLayout.lt-md="column" fxLayoutAlign="center start"> -->
+		<!-- <app-dispenser-component [dispenser]="selectedDispenser">Prescriber here</app-dispenser-component> -->
+	<!-- </div> -->
 </div>
